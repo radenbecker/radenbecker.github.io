@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Anhar & Aqira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- TEMA WARNA & UTAMA (Autumn Javanese Fusion) --- */
+        :root {
+            --bg-cream-top: rgba(255, 253, 249, 0.8);
+            --bg-cream-bottom: rgba(244, 234, 225, 0.92);
+            --accent-terracotta: #C87A53;
+            --text-dark: #5A4A42;
+            --soft-gold: #D4AF37;
+            --autumn-orange: #D9A05B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            text-align: center;
+            overflow-x: hidden;
+            background-color: #F4EAE1;
+        }
+
+        /* --- ORNAMEN UKIRAN JAWA / BATIK (Seni Garis CSS) --- */
+        .javanese-corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.5;
+            pointer-events: none;
+            border: 2px solid var(--accent-terracotta);
+            z-index: 2;
+        }
+        .jc-top-left {
+            top: 20px; left: 20px;
+            border-right: none; border-bottom: none;
+            border-top-left-radius: 15px;
+        }
+        .jc-top-left::before {
+            content: ''; position: absolute; top: 5px; left: 5px; width: 40px; height: 40px;
+            border-left: 1px dashed var(--accent-terracotta); border-top: 1px dashed var(--accent-terracotta);
+        }
+        .jc-top-right {
+            top: 20px; right: 20px;
+            border-left: none; border-bottom: none;
+            border-top-right-radius: 15px;
+        }
+        .jc-top-right::before {
+            content: ''; position: absolute; top: 5px; right: 5px; width: 40px; height: 40px;
+            border-right: 1px dashed var(--accent-terracotta); border-top: 1px dashed var(--accent-terracotta);
+        }
+        .jc-bottom-left {
+            bottom: 20px; left: 20px;
+            border-right: none; border-top: none;
+            border-bottom-left-radius: 15px;
+        }
+        .jc-bottom-left::before {
+            content: ''; position: absolute; bottom: 5px; left: 5px; width: 40px; height: 40px;
+            border-left: 1px dashed var(--accent-terracotta); border-bottom: 1px dashed var(--accent-terracotta);
+        }
+        .jc-bottom-right {
+            bottom: 20px; right: 20px;
+            border-left: none; border-top: none;
+            border-bottom-right-radius: 15px;
+        }
+        .jc-bottom-right::before {
+            content: ''; position: absolute; bottom: 5px; right: 5px; width: 40px; height: 40px;
+            border-right: 1px dashed var(--accent-terracotta); border-bottom: 1px dashed var(--accent-terracotta);
+        }
+
+        /* Pembatas Garis Bermotif Klasik Tengah */
+        .javanese-divider {
+            width: 80px;
+            height: 20px;
+            margin: 15px auto;
+            position: relative;
+            opacity: 0.4;
+        }
+        .javanese-divider::before {
+            content: '❖';
+            color: var(--accent-terracotta);
+            font-size: 1.2rem;
+            display: inline-block;
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .javanese-divider::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-terracotta), transparent);
+            left: 0; top: 50%;
+        }
+
+        /* --- STRUKTUR HALAMAN + SETTING GAMBAR BACKGROUND INTERAKTIF --- */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 60px 20px;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Penyetelan Gambar Berbeda Tiap Halaman dengan Lapisan Transparansi Autumn */
+        #page1 {
+            background-image: linear-gradient(180deg, var(--bg-cream-top) 0%, var(--bg-cream-bottom) 100%), 
+                              url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200');
+        }
+        #page2 {
+            background-image: linear-gradient(180deg, var(--bg-cream-top) 0%, var(--bg-cream-bottom) 100%), 
+                              url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200');
+        }
+        #page3 {
+            background-image: linear-gradient(180deg, var(--bg-cream-top) 0%, var(--bg-cream-bottom) 100%), 
+                              url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200');
+        }
+        #page4 {
+            background-image: linear-gradient(180deg, var(--bg-cream-top) 0%, var(--bg-cream-bottom) 100%), 
+                              url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200');
+        }
+
+        .page.active {
+            display: flex;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mengamankan elemen konten agar berada di atas background gambar */
+        .content-container {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Gaya Tulisan & Komponen --- */
+        h1.mempelai {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.8rem;
+            color: var(--accent-terracotta);
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: 0.99rem;
+        }
+
+        .text-pembuka {
+            max-width: 550px;
+            font-size: 0.9rem;
+            margin: 10px auto 20px auto;
+            color: var(--text-dark);
+            padding: 0 10px;
+        }
+
+        .btn {
+            background-color: var(--accent-terracotta);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 25px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(200, 122, 83, 0.4);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            z-index: 5;
+        }
+
+        .btn:hover {
+            background-color: #A65F3B;
+            transform: translateY(-3px);
+        }
+
+        /* --- HALAMAN 1: COUNTDOWN --- */
+        .countdown-container {
+            display: flex;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 75px;
+            border: 1px solid rgba(200, 122, 83, 0.25);
+        }
+
+        .countdown-box span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-terracotta);
+        }
+
+        /* --- HALAMAN 2: LAYOUT BERDAMPINGAN --- */
+        .mempelai-container {
+            margin: 15px 0;
+        }
+
+        .ortu {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #7A6A60;
+            margin-bottom: 5px;
+        }
+
+        .acara-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 650px;
+            margin: 25px 0;
+        }
+
+        .card-acara-split {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(90, 74, 66, 0.05);
+            flex: 1;
+            border: 1px solid rgba(230, 186, 147, 0.3);
+            border-top: 4px solid var(--accent-terracotta);
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .acara-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card-acara-split {
+                width: 100%;
+                max-width: 450px;
+            }
+        }
+
+        /* --- HALAMAN 3: FULL MAPS --- */
+        .maps-full-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            height: 450px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(90, 74, 66, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid white;
+        }
+
+        @media (max-width: 600px) {
+            .maps-full-container {
+                height: 350px;
+            }
+        }
+
+        .maps-label-red {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            background-color: #D32F2F;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .maps-label-red::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0;
+            border-style: solid;
+            border-color: #D32F2F transparent;
+            display: block;
+            width: 0;
+        }
+
+        /* --- HALAMAN 4: DONASI & QURAN --- */
+        .quran-box-page4 {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(5px);
+            padding: 30px 25px;
+            border-radius: 20px;
+            max-width: 550px;
+            margin: 15px auto 30px auto;
+            border: 1px solid rgba(200, 122, 83, 0.2);
+            border-top: 4px solid var(--accent-terracotta);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        }
+
+        .donation-section {
+            margin-top: 15px;
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: white;
+            border: 1px solid rgba(200, 122, 83, 0.3);
+            border-radius: 50%;
+            color: var(--accent-terracotta);
+            text-decoration: none;
+            font-size: 1.3rem;
+            /* font-weight: bold; */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-terracotta);
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <section id="page1" class="page active">
+        <div class="javanese-corner jc-top-left"></div>
+        <div class="javanese-corner jc-top-right"></div>
+        <div class="javanese-corner jc-bottom-left"></div>
+        <div class="javanese-corner jc-bottom-right"></div>
+
+        <div class="content-container">
+            <h2>Undangan Pernikahan</h2>
+            <div class="javanese-divider"></div>
+            <h1 class="mempelai">Anhar & Aqira</h1>
+            <p style="letter-spacing: 2px; font-weight: 600; color: #7A6A60; margin-top: 10px;">MINGGU, 7 JUNI 2026</p>
+
+            <div class="countdown-container">
+                <div class="countdown-box"><span id="days">00</span>Hari</div>
+                <div class="countdown-box"><span id="hours">00</span>Jam</div>
+                <div class="countdown-box"><span id="mins">00</span>Menit</div>
+                <div class="countdown-box"><span id="secs">00</span>Detik</div>
+            </div>
+
+            <button class="btn" onclick="bukaUndangan()">Buka Undangan</button>
+        </div>
+    </section>
+
+    <section id="page2" class="page">
+        <div class="javanese-corner jc-top-left"></div>
+        <div class="javanese-corner jc-top-right"></div>
+        <div class="javanese-corner jc-bottom-left"></div>
+        <div class="javanese-corner jc-bottom-right"></div>
+        
+        <div class="content-container">
+            <h3 style="color: var(--accent-terracotta); margin-bottom: 10px; letter-spacing: 1px; font-weight: 600; font-size: 1.1rem;">WALIMATUL URUSY</h3>
+            
+            <p style="font-weight: 600; margin-bottom: 10px;">Assalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+            <p class="text-pembuka">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan putra-putri kami :</p>
+            
+            <div class="mempelai-container">
+                <h1 class="mempelai" style="font-size: 2.6rem;">Anhar Firdaus, S.T.</h1>
+                <p class="ortu">Putra dari Bapak H. Darmawan & Ibu Huliyah</p>
+                <p style="font-style: italic; margin: 5px 0; color: var(--autumn-orange); font-weight: bold;">&</p>
+                <h1 class="mempelai" style="font-size: 2.6rem;">Aqira Monica Nindya Pradnya, S.S.</h1>
+                <p class="ortu">Putri dari Bapak Drs. Gatot Subiyantoro (Alm) & Ibu Mimin Wahyu Sunaryani</p>
+            </div>
+
+            <div class="acara-row">
+                <div class="card-acara-split">
+                    <h3 style="color: var(--accent-terracotta); margin-bottom: 10px; letter-spacing: 1px; font-weight: 600; font-size: 1.1rem;">AKAD NIKAH</h3>
+                    <p style="font-weight: 600; font-size: 0.9rem;">Pukul: 08.00 WITA</p>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #6E5D53;">Banjar Ketapang Muara, Desa Pengambengan, Negara - Bali</p>
+                </div>
+
+                <div class="card-acara-split">
+                    <h3 style="color: var(--accent-terracotta); margin-bottom: 10px; letter-spacing: 1px; font-weight: 600; font-size: 1.1rem;">RESEPSI</h3>
+                    <p style="font-weight: 600; font-size: 0.9rem;">Pukul: 14.00 WITA - Selesai</p>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: #6E5D53;">Banjar Ketapang Muara, Desa Pengambengan, Negara - Bali</p>
+                </div>
+            </div>
+
+            <p class="text-pembuka" style="margin-top: 5px; margin-bottom: 10px;">Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+            <p style="font-weight: 600;">Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+
+            <button class="btn" onclick="navigasiKe(3)">Denah Lokasi</button>
+        </div>
+    </section>
+
+    <section id="page3" class="page">
+        <div class="javanese-corner jc-top-left"></div>
+        <div class="javanese-corner jc-top-right"></div>
+        <div class="javanese-corner jc-bottom-left"></div>
+        <div class="javanese-corner jc-bottom-right"></div>
+
+        <div class="content-container">
+            <h2>Denah Lokasi</h2>
+            <div class="javanese-divider"></div>
+            
+            <div class="maps-full-container">
+                <div hidden>class="maps-label-red">LOKASI ACARA</div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d7894.020815746268!2d114.600089!3d-8.400636!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjQnMDIuMyJTIDExNMKwMzYnMDAuMyJF!5e0!3m2!1sid!2sid!4v1779068349393!5m2!1sid!2sid" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; display: block;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <a href="https://maps.app.goo.gl/MMKmCpB9QMz5ruAr8" target="_blank" class="btn" style="margin-top: 0.6 margin-right: 10px;">Buka Google Maps</a>
+                <button class="btn" onclick="navigasiKe(4)" style="margin-top: 0.6;">Kado Digital</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="page4" class="page">
+        <div class="javanese-corner jc-top-left"></div>
+        <div class="javanese-corner jc-top-right"></div>
+        <div class="javanese-corner jc-bottom-left"></div>
+        <div class="javanese-corner jc-bottom-right"></div>
+
+        <div class="content-container">
+            <h2>Kado Digital</h2>
+            <div class="javanese-divider"></div>
+
+            <div class="quran-box-page4">
+                <p style="font-weight: bold; margin-bottom: 12px; color: var(--accent-terracotta); letter-spacing: 1px; font-size: 1rem;">QS. Ar-Ruum: 21</p>
+                <p>"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya yang demikian itu menjadi tanda-tanda kebesaran-Nya bagi orang-orang yang berfikir."</p>
+            </div>
+
+            <div class="donation-section">
+                <p style="font-size: 0.9rem; margin-bottom: -10px; color: #7A6A60;">Berbagi Kasih Melalui Kado Digital:</p>
+                <a href="https://d2v6npc8wmnkqk.cloudfront.net/storage/26035/Tipe-QRIS-statis-small.webp" target="_blank" class="btn" style="background-color: #A65F3B;">
+                    Kirim Kado
+                </a>
+            </div>
+
+            <div class="social-container">
+                <a href="https://instagram.com/username" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/628xxxxxxxxxx" target="_blank" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/username" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook"></i></a>
+            </div>
+
+            <button class="btn" onclick="navigasiKe(1)" style="background: transparent; color: var(--accent-terracotta); border: 2px solid var(--accent-terracotta); box-shadow: none; margin-top: 40px;">Kembali ke Depan</button>
+        </div>
+    </section>
+
+    <script>
+        // Fungsi navigasi halaman
+        function navigasiKe(halamanTarget) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('page' + halamanTarget).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function bukaUndangan() {
+            navigasiKe(2);
+        }
+
+        // --- SISTEM COUNTDOWN ---
+        const tanggalAcara = new Date(2026, 5, 7, 8, 0, 0).getTime();
+
+        const hitungMundur = setInterval(function() {
+            const sekarang = new Date().getTime();
+            const selisih = tanggalAcara - sekarang;
+
+            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = hari < 10 ? "0" + hari : hari;
+            document.getElementById("hours").innerHTML = jam < 10 ? "0" + jam : jam;
+            document.getElementById("mins").innerHTML = menit < 10 ? "0" + menit : menit;
+            document.getElementById("secs").innerHTML = detik < 10 ? "0" + detik : detik;
+
+            if (selisih < 0) {
+                clearInterval(hitungMundur);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("mins").innerHTML = "00";
+                document.getElementById("secs").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
